@@ -331,6 +331,8 @@ video {
   opacity: 0;
   transition: 0.4s ease;
   pointer-events: auto;
+
+  max-width: 100%;
 }
 
 .video-card:hover .video-overlay {
@@ -406,14 +408,18 @@ video {
 
 .video-overlay h2 {
   margin: 0;
-  font-size: 30px;
+  font-size: clamp(18px, 3.5vw, 30px);
   font-weight: 700;
   font-family: "Courgette", cursive;
   color: #ffffff;
   line-height: 1.2;
   letter-spacing: 0.5px;
   pointer-events: none;
+  word-break: break-word;
 
+  max-width: 90%;
+
+  text-wrap: balance;
 
 }
 
@@ -550,10 +556,10 @@ p {
   color: #493f60; 
   max-width: 650px;
   margin: 10px auto;
+  padding: 0 clamp(16px, 5vw, 40px);
   text-align: center;
   font-size: 18px;
   line-height: 1.6;
-  text-indent: 0;
 }
 
 a:link {
@@ -767,6 +773,10 @@ h1 {
 
   header {
     padding: 20px 10px;
+  }
+  
+  video-overlay h2 {
+    font-size: clamp(16px, 4.5vw, 24px);
   }
 }
 
