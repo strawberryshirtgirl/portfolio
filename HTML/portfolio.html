@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+header {
+  background-color: #6db7c8;
+  text-align: center;
+  padding: 10px 10px 30px 10px; /*more space on bottom */}
+
+/* Style the topnav */
+ul.topnav {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  align-items: center;
+  gap: 20px; /*space between links */
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #493f60;
+
+}
+
+/* Style links in topnav */
+ul.topnav li a {
+  display: block;
+  color: #ffffff;
+  padding: 18px 28px; /*bigger clickable area */
+  font-size: 21px;    /*larger text */
+  text-decoration: none;
+  border-radius: 999px; /* fully rounded */
+  transition: all 0.3s ease; /* smooth animation */
+  font-family: "Courgette", cursive;
+  will-change: transform;
+}
+
+/* Change color on hover */
+ul.topnav li a:hover {
+  background: linear-gradient(
+    to right,
+    #ac315f 0%,
+    #fb97bf 50%,
+    #ac315f 100%
+  );
+  transform: translateY(-4px); /*slight lift */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.30); /*soft shadow */
+  color: #ffffff;
+}
+ul.topnav li a.active {
+ background: radial-gradient(circle, #ac315f 0%, #ac315f 60%, transparent 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.pill-button {
+  color: white !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 22px;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    135deg,
+    #ac315f 0%,
+    #fb97bf 50%,
+    #ac315f 100%
+  );
+  background-size: 200% 200%;
+
+  color: white;
+  font-size: 18px;
+  font-family: "Courgette", cursive;
+
+  text-decoration: none;   /* IMPORTANT */
+  border: none;
+
+  cursor: pointer;
+
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+
+  transform: translateY(0);
+  transition: all 0.25s ease;
+}
+
+.pill-button:hover {
+  transform: translateY(-3px);
+  background-position: right center;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+}
+
+.pill-button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+
+button.pill-button {
+  margin-top: 20px;
+}
+
+.pill-button:hover,
+.pill-button:active,
+.pill-button:focus {
+  text-decoration: none !important;
+  color: white !important;
+}
+
+
+video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
+/* Title above video */
+.video-text {
+  margin-bottom: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 auto 20px auto;
+
+  background: linear-gradient(
+    to right,
+    rgba(172, 49, 95, 0.8),
+    rgba(251, 151, 191, 0.8)
+  );
+
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+}
+.project {
+  width: 100%;
+  min-height: auto;
+  padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+}
+
+.video-card {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 0 auto 20px auto;
+
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 30px;
+  border: 2px solid rgba(172, 49, 95, 0.25);
+
+  cursor: pointer;
+  transition: transform 0.4s ease, border 0.4s ease;
+}
+
+
+
+
+.video-card:hover {
+  border: 2px solid rgba(251, 151, 191, 0.6);
+  transform: scale(1.01);
+}
+
+.project {
+  width: 100%;
+  padding: 120px 0;
+}
+
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floaty {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+.video-hint {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+
+  background: rgba(0,0,0,0.65);
+  color: white;
+
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  font-size: 20px;
+  font-family: "Courgette", cursive;
+
+  opacity: 1;
+  transform: translateY(0);
+  transition: 0.3s ease;
+
+  pointer-events: none;
+}
+
+.video-card:hover .video-hint {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+
+.video-card:hover .video-hint {
+  opacity: 0;
+  transform: translateY(5px);
+}
+
+
+
+.video-card:hover .video-hint {
+  opacity: 1;
+}
+
+
+.video-hint::before {
+  content: "▶ ";
+}
+
+
+/* disappear on hover (feels interactive) */
+.video-card:hover .video-hint {
+  opacity: 0;
+  transform: translateY(-5px);
+}
+
+
+.video-card:hover {
+  border: 2px solid rgba(251, 151, 191, 0.6);
+  transform: scale(1.01);
+}
+
+
+.video-card video {
+  transition: transform 0.6s ease;
+}
+
+.video-card:hover video {
+  transform: scale(1.015);
+}
+
+.video-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+
+
+
+.video-modal video {
+  width: 80%;
+  max-width: 1000px;
+  border-radius: 12px;
+}
+
+.video-modal.active {
+  display: flex;
+}
+
+.video-modal .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+}
+
+.preview-video {
+  opacity: 0.6;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.preview-video.playing {
+  opacity: 1;
+}
+
+.video-modal video {
+  width: 85%;
+  max-width: 1100px;
+  border-radius: 12px;
+  outline: none;
+}
+/* ---------- VIDEO OVERLAY TEXT ---------- */
+.video-overlay {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  padding: 20px;
+
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.65),
+    rgba(0,0,0,0.1),
+    transparent
+  );
+
+  color: white;
+
+  opacity: 0;
+  transition: 0.4s ease;
+  pointer-events: auto;
+}
+
+.video-card:hover .video-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* disappears after 5s using animation instead of JS */
+.video-card:hover .video-overlay {
+  animation: fadeOutOverlay 5s forwards;
+}
+
+@keyframes fadeOutOverlay {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.video-title {
+  font-size: 22px;
+  font-weight: bold;
+  font-family: "Courgette", cursive;
+}
+
+.video-desc {
+  font-size: 14px;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+
+
+/* ===== OVERLAY TEXT ON VIDEO CARD ===== */
+.video-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start; /* KEY FIX */
+
+  padding: 28px;
+
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.15),
+    transparent
+  );
+
+  color: white;
+
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+
+  pointer-events: auto;
+
+  text-align: left; /* KEY FIX */
+  max-width: 100%;
+}
+
+.video-card:hover .video-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.video-card:hover .video-overlay {
+  opacity: 1;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.video-overlay h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+  font-family: "Courgette", cursive;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+
+
+}
+
+.video-overlay p {
+  margin: 6px 0 0 0;
+  font-size: 16px;
+  color: rgba(255,255,255,0.85);
+  max-width: 80%; /* prevents weird stretching */
+  font-weight: 300;
+  pointer-events: none;
+
+}
+
+.video-overlay .pill-button {
+  display: inline-flex;
+  align-self: flex-start;
+
+  padding: 14px 22px;
+  font-size: 18px;
+
+  margin-top: 14px;
+}
+
+
+.video-overlay h2,
+.video-overlay p,
+.video-overlay .pill-button {
+  transform: translateY(8px);
+  opacity: 0;
+  transition: 0.4s ease;
+}
+
+.video-card:hover .video-overlay h2,
+.video-card:hover .video-overlay p,
+.video-card:hover .video-overlay .pill-button {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* hover sound cue (optional visual hint) */
+
+
+.video-card::after {
+  content: "▶ Watch on YouTube";
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 14px;
+  background: rgba(73,63,96,0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 999px;
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+.video-card:hover::after {
+  opacity: 1;
+}
+
+@keyframes soundPulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  65% {
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+.video-card:hover::after {
+  opacity: 1;
+  animation: soundPulse 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+
+/* MAIN ISSUE FOR WEIRD SPACING BETWEEN TEXT AND VIDEO BELOW FOR ANIMATION REEL
+.video-card:first-of-type {
+  margin-top: 40px;
+}
+*/
+
+/* MAIN PAGE WRAPPER */
+.page {
+  flex: 1;
+  background: linear-gradient(to bottom, #fb97bf, #ffffff);
+
+}
+
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+
+h1 { 
+    color: #ffffff; 
+    font-family: "Courgette", cursive;
+    margin-bottom: -20px;
+    font-size: 70px;
+    margin-left: 30px;
+    text-shadow: 2px 2px 4px #fb97bf;
+
+}
+h2 {
+    color: #ac315f; 
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 30px;
+    margin-bottom: 0px;
+    margin-left: 30px;
+    text-align: center;
+}
+
+h3 {
+    color: #ffffff; 
+    font-family: "Courgette", cursive;
+    font-size: 30px;
+    text-indent: 50px;
+}
+p {
+  color: #493f60; 
+  max-width: 650px;
+  margin: 10px auto;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.6;
+  text-indent: 0;
+}
+
+a:link {
+  color: #ac315f;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #ac315f;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: #ffffff;
+  background-color: transparent;
+  text-decoration: underline;
+}
+img.left {
+float: left; width: 400px; height: auto;
+margin: 30px 30px 30px 30px;
+}
+img.right {
+float: right; width: 300px; height: auto;
+margin: 10px 0px 0px 10px;
+}
+.footer {
+  /* position: fixed; */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #6db7c8;
+  color: #ac315f;
+  text-align: center;
+  padding: 30px 0;
+  margin: 0;
+  margin-top: auto;
+}
+
+html {
+  overflow-y: scroll;
+}
+ul.topnav {
+  width: 100%;
+}
+
+.video-overlay {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+body {
+  font-family: "Josefin Sans", sans-serif;
+  margin: 0;
+  background-color: #6db7c8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+
+.back-to-top {
+  display: block;
+  margin: 30px auto 60px auto;
+/*CHANGE THE FIRST AND THIRD FOR TOP AND BOTTOM SPACING 
+BETWEEN THE VIDEO AND BUTTON!!!! */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+
+  padding: 20px 40px; /* BIGGER */
+  border-radius: 999px;
+
+  background: linear-gradient(
+    135deg,
+    #493f60 0%,
+    #ac315f 40%,
+    #fb97bf 100%
+  );
+  background-size: 200% 200%;
+
+  color: white;
+  font-family: "Courgette", cursive;
+  font-size: 22px; /* BIGGER TEXT */
+
+  border: none;
+  cursor: pointer;
+
+  box-shadow: 0 0 25px rgba(251, 151, 191, 0.7);
+
+  transition: all 0.35s ease;
+
+  animation:
+    floaty 3s ease-in-out infinite,
+    gradientShift 6s ease infinite;
+
+  text-align: center;
+}
+
+/* show state */
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* hover = nav-style energy */
+.back-to-top:hover {
+  transform: translateY(-3px) scale(1.05);
+  background-position: right center;
+  box-shadow: 0 0 30px rgba(251, 151, 191, 1);
+}
+
+/* inner content for subtle motion */
+.btn-content {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.back-to-top:hover .btn-content {
+  transform: translateY(-1px);
+}
+
+/* gradient animation */
+@keyframes gradientShift {
+  0% { background-position: left; }
+  50% { background-position: right; }
+  100% { background-position: left; }
+}
+
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  font-size: 12px;
+  animation: sparkle-fade 0.8s ease forwards;
+}
+
+@keyframes sparkle-fade {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.8) translateY(-10px);
+  }
+}
+
+.berry {
+  position: fixed;
+  pointer-events: none;
+  font-size: 14px;
+  animation: berry-float 0.9s ease forwards;
+}
+
+@keyframes berry-float {
+  0% {
+    opacity: 1;
+    transform: scale(0.7) translateY(0px);
+  }
+  50% {
+    transform: scale(1.2) translateY(-10px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.4) translateY(-22px);
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: left; }
+  50% { background-position: right; }
+  100% { background-position: left; }
+}
+
+
+
+
+.scroll-down {
+  display: block;
+  margin: 20px auto 40px auto; /* top auto left/right auto centers it */
+  animation: floaty 2.5s ease-in-out infinite;
+
+  font-size: 22px;     /* bigger text */
+  padding: 18px 34px;  /* bigger button */
+}
+
+
+
+
+
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+
+    <title>🍓strawberryshirtgirl ~ portfolio </title>
+    </head>
+    <body>
+      
+
+<header>
+  <h1>Sophia Ossaoulenko</h1>
+  <h2>@strawberryshirtgirl</h2>
+</header>
+
+
+
+<div class="page">
+   <ul class="topnav">
+  <li><a href="../index.html">Home</a></li>
+  <li><a href="biography.html">About</a></li>
+  <li><a href="portfolio.html">Portfolio</a></li>
+  </ul>
+
+<p></p>
+<div class="content">
+
+
+<h2>Animation Reel</h2>
+<p>Features my 2D and 3D animations. 2D is my primary medium with my
+ 3D generalist abilities adding flexibility in my creative workflow.
+</p> 
+<section class="project-section">
+<div class="video-card">
+
+  <div class="video-hint">Click to Watch the Full Video!</div>
+
+  <video class="preview-video" muted loop playsinline preload="auto" poster="../Images/reel_thumb.jpg">
+    <source src="../Images/Ossaoulenko_Sophia_WebSiteShortenedAnimationReel.mp4" type="video/mp4">
+  </video>
+
+  <!-- ✅ MOVE OVERLAY INSIDE -->
+  <div class="video-overlay">
+    <h2>Animation Reel</h2>
+    <p>Adobe Suite • Maya • ZBrush • Procreate</p>
+    
+    <a class="pill-button"
+   href="https://youtu.be/DQX-rCi5oTk"
+   target="_blank"
+   rel="noopener noreferrer"
+   onclick="stopAllVideoAudio()">
+   ▶ View on YouTube
+</a>
+
+
+
+  
+  </div>
+  </div>
+
+<div id="scroll-target"></div>
+<button class="pill-button scroll-down" onclick="scrollToNext()">
+  ⬇ Scroll
+</button>
+</section>
+
+
+<!--
+FOR LATER, MORE VIDEOS
+<div id="reel"></div>
+<div id="project-1"></div>
+<div id="project-2"></div>
+
+in script each button will be
+
+document.getElementById("project-1").scrollIntoView({ behavior: "smooth" });
+
+-->
+
+
+</div>
+
+
+<h2>Henry & Carrie</h2>
+<p>Features visually timed story beats. I used a range of cinematic techniques to create a more 
+captivating narrative and animatic. 
+</p>
+
+<div class="video-card">
+
+  <div class="video-hint">Click to Watch the Full Video!</div>
+
+  <video class="preview-video" muted loop playsinline preload="auto" poster="../Images/reel_thumb.jpg">
+    <source src="../Images/Henry_Carrie_IdiomsV2.mp4" type="video/mp4">
+  </video>
+
+  <!-- ✅ MOVE OVERLAY INSIDE -->
+  <div class="video-overlay">
+    <h2>Henry & Carrie Animatic Film</h2>
+    <p>Adobe Premiere Pro • Procreate • Procreate Dreams </p>
+    <a class="pill-button"
+   href="https://youtu.be/d_ei3bREpjQ"
+   target="_blank"
+   rel="noopener noreferrer"
+   onclick="stopAllVideoAudio()">
+   ▶ View on YouTube
+</a>
+
+
+</div>
+  <!-- <h2>Animation Reel</h2>
+
+  <p>
+    Software Used: Adobe Suite, Maya, ZBrush, Procreate
+  </p>
+
+  <p>
+    Music: Chopin Etudes
+  </p>
+
+  <button class="pill-button"
+    onclick="window.open('YOUR_YOUTUBE_LINK', '_blank')">
+    ▶ View on YouTube
+  </button>
+
+</div> -->
+
+<!--
+<div class="page">
+  <div>
+
+    
+    <div class="video-text">Most Recent Works</div>
+    <div class="video-container">
+      <div class="video-wrapper">
+        <video controls>
+          <source src="../Images/Ossaoulenko_Sophia_WebSiteShortenedAnimationReel.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <h2>Animation Reel</h2>
+      <p>Software Used:
+      Adobe Suite (Photoshop, Premiere, After Effects, Substance Painter), Maya, ZBrush, Procreate
+      Reel including 3D animation & 2D Animation (Rough and Animatic Style)</p>
+
+      <p>Music used: Chopin 12 Etudes, Op. 10: No. 3 in E Major "Tristesse"</p>
+
+      <button class="pill-button" onclick="window.open('https://youtu.be/DQX-rCi5oTk', '_blank')">
+        ▶️ View on Youtube 
+      </button>
+    </div>
+
+     SECOND VIDEO 
+    <div class="video-text">Henry & Carrie Original Animatic Film</div>
+    <div class="video-container">
+      <div class="video-wrapper">
+        <video controls>
+          <source src="../Images/Henry&Carrie_Idioms.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <h2>Henry & Carrie Animatic Film</h2>
+      <p>Software Used:
+      Procreate, Procreate Dreams, & Adobe Premiere Pro</p>
+
+      <p>Music used: Chopin 12 Etudes, Op. 10: No. 3 in E Major "Tristesse"</p>
+
+      <button class="pill-button" onclick="window.open('https://youtu.be/d_ei3bREpjQ', '_blank')">
+        ▶️ View on Youtube 
+      </button>
+    </div>
+
+  </div>
+</div>
+-->
+
+</div> <!-- end of page content -->
+
+<button id="backToTop" class="back-to-top">
+  🍓 Back to Top
+</button>
+
+<div class="footer">
+  <p>© Sophia Ossaoulenko. All Rights Reserved.</p>
+</div>
+
+<script>
+const videos = document.querySelectorAll(".preview-video");
+
+/* ---------- SCROLL PREVIEW ---------- */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    const video = entry.target;
+
+    if (entry.isIntersecting) {
+      video.play();
+      video.classList.add("playing");
+    } else {
+      video.pause();
+      video.classList.remove("playing");
+    }
+  });
+}, { threshold: 0.6 });
+
+videos.forEach(video => observer.observe(video));
+
+let audioUnlocked = false;
+
+
+
+
+/* ---------- HOVER SOUND ---------- */
+let activeVideo = null;
+let fadeInterval = null;
+
+document.querySelectorAll(".video-card").forEach(card => {
+  const video = card.querySelector("video");
+
+  card.addEventListener("mouseenter", () => {
+    if (!video) return;
+
+    // stop any other video's sound
+    if (activeVideo && activeVideo !== video) {
+      activeVideo.muted = true;
+      activeVideo.volume = 0;
+    }
+
+    activeVideo = video;
+
+    video.muted = false;
+    video.volume = 0;
+
+    clearInterval(fadeInterval);
+
+    fadeInterval = setInterval(() => {
+      if (video.volume < 0.3) {
+        video.volume += 0.05;
+      } else {
+        video.volume = 0.3;
+        clearInterval(fadeInterval);
+      }
+    }, 40);
+  });
+
+  card.addEventListener("mouseleave", () => {
+    if (!video) return;
+
+    clearInterval(fadeInterval);
+
+    fadeInterval = setInterval(() => {
+      if (video.volume > 0.05) {
+        video.volume -= 0.05;
+      } else {
+        video.volume = 0;
+        video.muted = true;
+        clearInterval(fadeInterval);
+      }
+    }, 40);
+  });
+});
+
+document.addEventListener("pointerdown", () => {
+  document.querySelectorAll("video").forEach(v => {
+    v.muted = false;
+    v.muted = true;
+  });
+}, { once: true });
+
+function stopAllVideoAudio() {
+  document.querySelectorAll("video").forEach(v => {
+    v.pause();
+    v.muted = true;
+    v.volume = 0;
+  });
+
+  clearInterval(fadeInterval);
+  activeVideo = null;
+}
+
+
+
+
+document.querySelectorAll(".video-card").forEach(card => {
+  card.addEventListener("click", (e) => {
+    if (e.target.closest("a")) return;
+
+    const link = card.querySelector("a.pill-button");
+    if (link) {
+      window.open(link.href, "_blank", "noopener noreferrer");
+    }
+  });
+});
+
+
+
+const backToTopBtn = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    backToTopBtn.classList.add("show");
+  } else {
+    backToTopBtn.classList.remove("show");
+  }
+});
+
+backToTopBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
+
+
+
+
+backToTopBtn.addEventListener("mouseenter", () => {
+  for (let i = 0; i < 7; i++) {
+    const particle = document.createElement("div");
+    particle.className = "berry";
+
+    // 🍓 + 💗 mix
+    particle.innerHTML = Math.random() > 0.4 ? "🍓" : "💗";
+
+    const rect = backToTopBtn.getBoundingClientRect();
+
+    particle.style.left = rect.left + Math.random() * rect.width + "px";
+    particle.style.top = rect.top + Math.random() * rect.height + "px";
+
+    document.body.appendChild(particle);
+
+    setTimeout(() => {
+      particle.remove();
+    }, 900);
+  }
+});
+
+backToTopBtn.addEventListener("click", () => {
+  for (let i = 0; i < 12; i++) {
+    const burst = document.createElement("div");
+    burst.className = "berry";
+    burst.innerHTML = "🍓";
+
+    const rect = backToTopBtn.getBoundingClientRect();
+
+    burst.style.left = rect.left + rect.width / 2 + "px";
+    burst.style.top = rect.top + rect.height / 2 + "px";
+
+    document.body.appendChild(burst);
+
+    setTimeout(() => burst.remove(), 900);
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
+
+
+/*
+document.addEventListener("mousemove", (e) => {
+  const sparkle = document.createElement("div");
+  sparkle.className = "sparkle";
+
+  sparkle.innerHTML = Math.random() > 0.5 ? "✨" : "🍓";
+
+  sparkle.style.left = e.clientX + "px";
+  sparkle.style.top = e.clientY + "px";
+
+  document.body.appendChild(sparkle);
+
+  setTimeout(() => {
+    sparkle.remove();
+  }, 800);
+});
+
+*/
+
+function scrollToNext() {
+  const target = document.getElementById("scroll-target");
+
+  target.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+  

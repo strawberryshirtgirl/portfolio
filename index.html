@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+
+html.no-loader #loader {
+    display: none !important;
+  }
+
+
+
+img {
+  border-radius: 20px;
+  width: 100%;
+  max-width: 100%;  /* real size control */
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    transform: scale(1.05);
+}
+header {
+  background-color: #6db7c8;
+  text-align: center;
+  padding: 10px 10px 30px 10px; /*more space on bottom */}
+
+/* Style the topnav */
+ul.topnav {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  align-items: center;
+  gap: 20px; /*space between links */
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #493f60;
+}
+
+/* Style links in topnav */
+ul.topnav li a {
+  display: block;
+  color: #ffffff;
+  padding: 18px 28px; /*bigger clickable area */
+  font-size: 21px;    /*larger text */
+  text-decoration: none;
+  border-radius: 999px; /* fully rounded */
+  transition: all 0.3s ease; /* smooth animation */
+  font-family: "Courgette", cursive;
+  will-change: transform;
+}
+
+/* Change color on hover */
+ul.topnav li a:hover {
+  background: linear-gradient(
+    to right,
+    #ac315f 0%,
+    #fb97bf 50%,
+    #ac315f 100%
+  );
+  transform: translateY(-4px); /*slight lift */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.30); /*soft shadow */
+  color: #ffffff;
+}
+ul.topnav li a.active {
+ background: radial-gradient(circle, #ac315f 0%, #ac315f 60%, transparent 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+div.flex-container {
+  display: flex;
+  align-items: flex-start;
+  background-color: #fb97bf;
+  background-image: linear-gradient(to bottom, #fb97bf,#ffffff);
+
+  flex-direction: row;
+  gap: 20px; /* smaller gap */
+  padding: 40px 30px; /* slightly tighter than before */
+}
+
+/* image columns (left + middle) */
+div.flex-container > div:nth-child(1),
+div.flex-container > div:nth-child(2) {
+  flex: 1.5;
+}
+div.flex-container > div:nth-child(3) p {
+  max-width: 100%;
+}
+
+/* TEXT COLUMN (make it much wider) */
+div.flex-container > div:nth-child(3) {
+  flex: 3;
+  max-width: none;
+}
+
+@media screen and (max-width: 800px) {
+  div.flex-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+
+  }
+}
+
+.pill-button {
+  display: inline-block;
+  color: #ffffff;
+  background-color: #493f60;
+  padding: 18px 28px;
+  font-size: 21px;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-family: "Courgette", cursive;
+}
+
+.pill-button:hover {
+  background: linear-gradient(
+    to right,
+    #ac315f 0%,
+    #fb97bf 50%,
+    #ac315f 100%
+  );
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.button-container {
+  display: flex;
+  /* justify-content: center; */
+  margin-top: 20px;
+}
+body {
+  font-family: "Josefin Sans", sans-serif;
+  margin: 0;
+  background-color: #6db7c8;
+}
+
+h1 { 
+    color: #ffffff; 
+    font-family: "Courgette", cursive;
+    margin-bottom: -20px;
+    font-size: 70px;
+    margin-left: 30px;
+    text-shadow: 2px 2px 4px #fb97bf;
+
+}
+h2 {
+    color: #ac315f; 
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 30px;
+    margin-bottom: 0px;
+    margin-left: 30px;
+}
+
+h3 {
+    color: #ffffff; 
+    font-family: "Courgette", cursive;
+    font-size: 30px;
+    text-indent: 50px;
+}
+
+p {
+    color: #493f60; 
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 21px;
+    text-indent: 50px;
+    margin-left: 50px;
+}
+a:link {
+  color: #ac315f;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #ac315f;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: #ffffff;
+  background-color: transparent;
+  text-decoration: underline;
+}
+/*img.left {
+float: left; width: 400px; height: auto;
+margin: 30px 30px 30px 30px;
+}
+img.right {
+float: right; width: 300px; height: auto;
+margin: 10px 0px 0px 10px;
+} */
+.footer {
+  /* position: fixed; */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #6db7c8;
+  color: #ac315f;
+  text-align: center;
+  padding: 8px;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+html, body {
+  height: 100%;
+}
+
+.content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  margin-top: 40px;
+}
+.image-modal {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  
+  position: fixed;
+  z-index: 9999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.9);
+  padding-top: 80px; /* was 60px */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.image-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.image-modal-content {
+  display: block;
+  margin: auto;
+  
+  max-width: 80%;
+  max-height: 75vh; /* leaves room for caption */
+  
+  width: auto;
+  height: auto;
+  
+  border-radius: 20px;
+  object-fit: contain;
+
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.image-close {
+  position: fixed;   /* changed */
+  top: 15px;
+  right: 20px;
+  z-index: 10000;    /* ensure it's always on top */
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+
+
+.image-close:hover {
+  opacity: 0.7;
+}
+
+img::after {
+  content: "🔍";
+  position: absolute;
+}
+
+.image-modal:not(.show) .image-modal-content {
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+.image-modal-content.large-mode {
+  max-width: 90%;
+  max-height: 85vh;
+}
+
+.image-caption {
+  text-align: center;
+  color: #ffffff;
+  margin-top: 15px;
+  margin-bottom: 30px; /* gives breathing room */
+  font-size: 20px;
+  opacity: 0.9;
+}
+
+/* Portrait images (like your photo) */
+.image-modal-content.portrait {
+  max-height: 65vh;
+  max-width: 50%;
+}
+
+/* Landscape images (like resume) */
+.image-modal-content.landscape {
+  max-height: 80vh;
+  max-width: 85%;
+}
+
+/* Manual override (resume = biggest) */
+.image-modal-content.large-mode {
+  max-height: 88vh;
+  max-width: 95%;
+}
+
+.button-row {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap; /* allows safe wrapping on small screens */
+}
+
+@media screen and (max-width: 600px) {
+  .button-row {
+    flex-direction: column;
+    align-items: center;      /* centers buttons horizontally */
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 600px) {
+  p {
+    margin-left: 0;
+    text-indent: 0;
+    text-align: center;
+  }
+}
+
+.button-row button {
+  text-align: center;
+}
+
+div.flex-container {
+  gap: 12px;
+  padding: 30px 20px;
+}
+
+div.flex-container img {
+  max-width: 600px;
+}
+
+.footer {
+  position: relative;
+  clear: both;
+}
+
+
+
+
+
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(
+    180deg,
+    #6db7c8 0%,
+    #5b4a78 35%,
+    #fb97bf 70%,
+    #ffffff 100%
+  );
+
+  opacity: 1;
+  filter: blur(0px);
+  transform: scale(1);
+
+  transition: 
+    opacity 1.2s ease,
+    filter 1.2s ease,
+    transform 1.2s ease;
+}
+
+#loader.hide {
+  opacity: 0;
+  filter: blur(16px);
+transition: 
+  opacity 1.4s ease,
+  filter 1.4s ease,
+  transform 1.4s ease;
+}
+
+.postcard-wrap {
+  position: relative;
+  animation: stampIn 1.2s cubic-bezier(.2,.9,.2,1) forwards;
+  transform-origin: center;
+}
+
+/* stamp + bounce */
+@keyframes stampIn {
+  0% {
+    transform: scale(1.6) rotate(-6deg);
+    opacity: 0;
+    filter: blur(6px);
+  }
+
+  60% {
+    transform: scale(0.95) rotate(2deg);
+    opacity: 1;
+    filter: blur(0px);
+  }
+
+  80% {
+    transform: scale(1.03) rotate(-1deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.intro-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+/* postcard slightly bigger + more “hero” */
+.postcard {
+  width: 320px;
+  border-radius: 18px;
+  box-shadow: 0 0 30px rgba(251,151,191,0.55);
+}
+
+/* name styling */
+.name {
+  font-family: "Courgette", cursive;
+  font-size: 34px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+
+/* handle */
+.sub {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 18px;
+  color: #ffffffcc;
+  text-align: center;
+}
+
+/* bloom in */
+@keyframes postcardBloom {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* optional “fly away” exit */
+.postcard-wrap.fly {
+  animation: flyAway 1s ease forwards;
+}
+
+@keyframes flyAway {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8) translateY(-120px);
+    opacity: 0;
+  }
+}
+
+/* center container */
+.intro-wrap {
+  position: relative;
+  text-align: center;
+}
+
+/* main strawberry bloom */
+.strawberry {
+  font-size: 70px;
+  animation: bloom 1s ease-in-out forwards;
+  filter: drop-shadow(0 0 12px #fb97bf);
+}
+
+.petals {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
+}
+
+
+
+/* intro text */
+.intro-text {
+  margin-top: 30px;
+  font-family: "Courgette", cursive;
+  font-size: 32px;
+  color: white;
+
+  opacity: 0;
+  transform: translateY(10px);
+  animation: revealText 1s ease forwards 1.2s;
+}
+
+
+/* TEXT REVEAL */
+@keyframes revealText {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+.stamp {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 37px;
+  opacity: 0;
+  transform: scale(2);
+  animation: stampPop 0.6s ease forwards 0.8s;
+  filter: drop-shadow(0 0 6px #fb97bf);
+}
+
+@keyframes stampPop {
+  0% {
+    transform: scale(2);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+html.no-loader #loader {
+  display: none !important;
+}
+
+
+
+
+.replay-container {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0 10px 0;
+}
+
+.replay-btn {
+  font-size: 18px;
+  padding: 14px 24px;
+}
+
+
+
+
+.sparkle-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  z-index: 1000;
+  font-size: 28px;
+
+  animation: floatSparkle 3s ease-in-out infinite;
+
+}
+
+/* inner sparkle handles scale only */
+.sparkle-btn span {
+  display: inline-block;
+  animation: sparklePulse 2s ease-in-out infinite;
+}
+
+.sparkle-btn:hover::before {
+  opacity: 1;
+  filter: blur(10px);
+}
+
+/* ✨ purple aura layer */
+.sparkle-btn::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  z-index: -1;
+
+  background: radial-gradient(
+    circle,
+    rgba(172, 49, 95, 0.6) 0%,
+    rgba(91, 74, 120, 0.5) 90%,
+    transparent 70%
+  );
+
+  filter: blur(6px);
+  opacity: 0.8;
+}
+
+/* glow pulse */
+@keyframes sparklePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.10);
+  }
+}
+
+/* floating motion */
+
+@keyframes floatSparkle {
+  0%   { transform: translateY(0px) rotate(0deg); }
+  50%  { transform: translateY(-6px) rotate(4deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* hover = stronger magic */
+.sparkle-btn:hover {
+  transform: scale(1.25) rotate(10deg);
+}
+
+
+
+
+.postcard {
+  width: 320px;
+  border-radius: 18px;
+  box-shadow: 0 0 30px rgba(251,151,191,0.55);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.postcard:hover {
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 0 45px rgba(251,151,191,0.85);
+}
+
+</style>
+
+<script>
+  if (sessionStorage.getItem("strawberryLoaderShown")) {
+    document.documentElement.classList.add("no-loader");
+  }
+</script>
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+
+    <title>🍓strawberryshirtgirl ~ home </title>
+    </head>
+
+<!-- IMAGE MODAL -->
+<div id="imageModal" class="image-modal">
+  <span class="image-close">&times;</span>
+  <img class="image-modal-content" id="modalImg">
+  <div id="modalCaption" class="image-caption"></div>
+</div>
+
+
+
+<body>
+
+
+<div id="loader">
+
+  <div class="intro-card">
+
+    <div class="postcard-wrap">
+      <img src="Images/strawberryshirtgirlpostcard.jpg"
+     class="postcard"
+     id="introPostcard"
+     alt="You found a secret message! Well butter my biscuit! Congrats! :D">
+      <div class="stamp">✨</div>
+    </div>
+
+    <div class="intro-text">
+      <div class="name">Sophia Ossaoulenko</div>
+      <div class="sub">@strawberryshirtgirl</div>
+    </div>
+
+  </div>
+
+</div>
+
+<header>
+  <h1>Sophia Ossaoulenko</h1>
+  <h2>@strawberryshirtgirl</h2>
+</header>
+
+<ul class="topnav">
+  <li><a href="index.html">Home</a></li>
+  <li><a href="HTML/biography.html">About</a></li>
+  <li><a href="HTML/portfolio.html">Portfolio</a></li>
+</ul>
+
+
+<div class="flex-container">
+<div>
+  <h2>Skills & Experience</h2>
+  <br>
+
+  <img src="Images/strawberryshirtgirlresume.jpg"
+       alt="My Animation Resume."
+       style="width: 100%; max-width: 520px;">
+</div>
+
+  <div>
+  <h2>This is Me!</h2>
+  <br>
+
+  <img src="Images/websitepotraitso.png"
+       alt="A little glimpse into me — Sophia Ossaoulenko."
+       style="width: 100%; max-width: 520px;">
+  </div>
+<div>
+<h2>Who is strawberryshirtgirl?</h2>
+<p>My name is Sophia Ossaoulenko! </p>
+<p>I am a storyboard artist and a 2D Animator
+  proficient in Adobe Photoshop, Adobe Premiere, and Procreate + Procreate Dreams.
+  I run an an art instagram account where I share engaging original art. 
+  </p>
+  <p></p>
+  <p>You may reach me at:</p>
+<div class="button-row">
+  <button class="pill-button" onclick="window.open('https://instagram.com/strawberryshirtgirl', '_blank')">
+    📷 Instagram
+  </button>
+
+  <button class="pill-button" onclick="copyEmail(this)">
+  <span class="btn-text">🍓 strawberryshirtgirl@gmail.com 🍓</span>
+</button>
+</div>
+<p></p>
+
+<script>
+function copyEmail(button) {
+  navigator.clipboard.writeText("strawberryshirtgirl@gmail.com");
+
+  const text = button.querySelector(".btn-text");
+
+  // change only the text inside span
+  text.innerText = "✔ Yay, Copied!";
+
+  setTimeout(() => {
+    text.innerText = "🍓 strawberryshirtgirl@gmail.com 🍓";
+  }, 1500);
+}
+</script>
+
+  <p>Feel free to say hello to me via both ways! </p>
+    <br></br>
+  <h2>
+  Thank you for checking out my art site! ❤  
+<span class="sparkle-btn" onclick="replayIntro()">
+  <span>✨</span>
+</span></h2>
+  
+</div>
+
+</div>
+
+
+<div class="footer">
+  <p>© Sophia Ossaoulenko. All Rights Reserved.</p>
+</div>
+
+<script>
+
+if (sessionStorage.getItem("strawberryLoaderShown")) {
+  document.documentElement.classList.add("no-loader");
+}
+const modal = document.getElementById("imageModal");
+const modalImg = document.getElementById("modalImg");
+const captionText = document.getElementById("modalCaption");
+const closeBtn = document.querySelector(".image-close");
+
+/* ---------- MODAL ---------- */
+
+function openModal(img) {
+  modal.classList.add("show");
+  modalImg.src = img.src;
+  captionText.innerText = img.alt;
+
+  modalImg.classList.remove("portrait", "landscape", "large-mode");
+
+  modalImg.onload = function () {
+    if (modalImg.naturalHeight > modalImg.naturalWidth) {
+      modalImg.classList.add("portrait");
+    } else {
+      modalImg.classList.add("landscape");
+    }
+  };
+}
+
+/* ONLY ONE image click handler */
+document.querySelectorAll("img").forEach(img => {
+  img.addEventListener("click", function () {
+
+    if (this.id === "introPostcard") return;
+    if (this.parentElement.tagName === "A") return;
+
+    openModal(this);
+  });
+});
+
+/* modal close */
+closeBtn.onclick = () => modal.classList.remove("show");
+
+modal.addEventListener("click", e => {
+  if (e.target === modal) modal.classList.remove("show");
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") modal.classList.remove("show");
+});
+
+/* ---------- LOADER ---------- */
+
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  const postcard = document.getElementById("introPostcard");
+
+  let interacted = false;
+
+   if (sessionStorage.getItem("strawberryLoaderShown")) {
+    loader?.remove();
+    return; // 🚨 THIS is what makes it stable
+  }
+
+  sessionStorage.setItem("strawberryLoaderShown", "true");
+
+  postcard.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    interacted = true;
+    openModal(postcard);
+
+    setTimeout(() => {
+      loader.classList.add("hide");
+    }, 1200);
+  });
+
+  setTimeout(() => {
+    if (!interacted) {
+      loader.classList.add("hide");
+    }
+  }, 2600);
+
+  loader.addEventListener("transitionend", () => {
+    loader.remove();
+  });
+
+  // 🔒 fallback safety
+  setTimeout(() => {
+    if (document.body.contains(loader)) {
+      loader.remove();
+    }
+  }, 3000);
+});
+
+/* ---------- REPLAY ---------- */
+
+function replayIntro() {
+  sessionStorage.removeItem("strawberryLoaderShown");
+  location.reload();
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.shiftKey && e.key === "R") {
+    sessionStorage.removeItem("strawberryLoaderShown");
+    location.reload();
+  }
+});
+
+
+
+
+</script>
+</body>
+</html>
+
+  
