@@ -510,10 +510,19 @@ html, body {
     <img src="../Images/snofikocard.png"
          alt="My digital business card. Save one!">
     <h2>📩 Contact Me</h2>
+    <p>For General Inquiries & Commissions</p>
     <p>snofikoart@gmail.com</p>
-    <button class="pill-button" onclick="copyEmail(this)">
-      <span class="btn-text">Copy Email</span>
-</button>
+    <p>Please allow up to 3 business days for a response.</p>
+    <button class="pill-button" onclick="copyEmail(this, 'snofikoart@gmail.com')">
+    <span class="btn-text">Copy Email</span>
+    </button>
+    <h2>🎬 Studio Hires & Employment Opportunities</h2>
+    <p>For studio employment opportunities, please refer to my resume and contact me at my professional email address.</p>
+    <p>sophiaossa5@gmail.com</p>
+    <button class="pill-button" onclick="copyEmail(this, 'sophiaossa5@gmail.com')">
+    <span class="btn-text">Copy Email</span>
+    </button>
+      
   </div>
 
   <!-- RIGHT: TEXT -->
@@ -548,7 +557,7 @@ Women, young adults, hopeful romantics, and comedy fans will find Sophia’s bod
 
 
 <script>
-function copyEmail(button) {
+/* function copyEmail(button) {
   navigator.clipboard.writeText("snofikoart@gmail.com");
 
   const text = button.querySelector(".btn-text");
@@ -559,6 +568,18 @@ function copyEmail(button) {
   setTimeout(() => {
     text.innerText = "Copy Email";
   }, 1500);
+*/
+  function copyEmail(button, email) {
+  navigator.clipboard.writeText(email).then(() => {
+    const text = button.querySelector('.btn-text');
+    const originalText = text.textContent;
+
+    text.textContent = '✔ Yay, Copied!';
+
+    setTimeout(() => {
+      text.textContent = originalText;
+    }, 1500);
+  });
 }
 </script>
 
